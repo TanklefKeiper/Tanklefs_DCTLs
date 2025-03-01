@@ -1,0 +1,32 @@
+DEFINE_UI_PARAMS(s1, 1, DCTLUI_SLIDER_FLOAT, 0.0f, -1.f, 1.f, 0.01)
+DEFINE_UI_PARAMS(s2, 2, DCTLUI_SLIDER_FLOAT, 0.0f, -1.f, 1.f, 0.01)
+DEFINE_UI_PARAMS(s3, 3, DCTLUI_SLIDER_FLOAT, 0.0f, -1.f, 1.f, 0.01)
+DEFINE_UI_PARAMS(s4, 1, DCTLUI_SLIDER_FLOAT, 0.0f, -1.f, 1.f, 0.01)
+DEFINE_UI_PARAMS(s5, 2, DCTLUI_SLIDER_FLOAT, 0.0f, -1.f, 1.f, 0.01)
+DEFINE_UI_PARAMS(s6, 3, DCTLUI_SLIDER_FLOAT, 0.0f, -1.f, 1.f, 0.01)
+
+#include "splines.h"
+
+
+
+
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B)
+{
+	
+	float3 in = {p_R, p_G, p_B};
+
+    float2 S1 = {0.f, 0.f + s1};
+    float2 S2 = {0.2f, 0.2f + s2};
+    float2 S3 = {0.4f, 0.4f + s3};
+    float2 S4 = {0.6f, 0.6f + s4};
+    float2 S5 = {0.8f, 0.8f + s5};
+    float2 S6 = {1.f, 1.f + s6};
+
+	float Rspline = assemble_6point_B_spline(p_R, S1, S2, S3, S4, S5, S6);
+    float Gspline = assemble_6point_B_spline(p_G, S1, S2, S3, S4, S5, S6);
+    float Bspline = assemble_6point_B_spline(p_B, S1, S2, S3, S4, S5, S6);
+
+    float3 out = make_float3(Rspline, Gspline, Bspline);
+
+	return out;
+}
