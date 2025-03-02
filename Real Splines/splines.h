@@ -78,7 +78,7 @@ __DEVICE__ float x_vs_spline(float4x4 SplineType, float x, float2 P1, float2 P2,
     return y;
 }
 
-__DEVICE__ float assemble_6point_B_spline(float x, float2 P0, float2 P1, float2 P2, float2 P3, float2 P4, float2 P5){   //example function of how to piecewise define a spline with more controll points (here a B-spline with 6 controll points)
+__DEVICE__ float assemble_6point_B_spline(float x, float2 P0, float2 P1, float2 P2, float2 P3, float2 P4, float2 P5){   //example function of how to piecewise define a spline with more control points (here a B-spline with 6 control points)
     float2 G0 = P0 - (P1 - P0);        //extrapolated points for start and finish
     float2 G1 = P5 + (P5 - P4);
     float2 G3 = P5 + 2.f * (P5 - P4); //for extension above 1.f
